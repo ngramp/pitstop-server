@@ -41,6 +41,7 @@ public class PitStopServiceImpl implements PitStopService{
             //relying on equals method for vehicle number and pitStopIn time
             if(!pitStopRepository.findAll().contains(newPitStop)){
                 pitStopRepository.save(newPitStop);
+                log.info(newPitStop.toString());
             }
         }
         pitStopRepository.flush();

@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +46,8 @@ public class LiveFeedSync extends Thread{
                         for(PitStop pitStop : vehicle.getPitStops()){
                             PitStopEntity ent = new PitStopEntity();
                             ent.setVehicleNumber(vehicle.getVehicleNumber());
-                            //assuming double is in seconds so converting to milliseconds
-                            Long millisecondsIn = Math.round(pitStop.getTimeIn() * 1000);
-                            ent.setTimeIn(new Time(millisecondsIn));
-                            Long millisecondsOut = Math.round(pitStop.getTimeOut() * 1000);
-                            ent.setTimeOut(new Time(millisecondsOut));
+                            ent.setTimeIn(pitStop.getTimeIn());
+                            ent.setTimeOut(pitStop.getTimeOut());
                             entities.add(ent);
                         }
                     }

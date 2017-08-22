@@ -1,7 +1,6 @@
 package com.hawkeye.pitstop.entities;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
 public class PitStopEntity {
@@ -10,9 +9,13 @@ public class PitStopEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer vehicleNumber;
-    private Time timeIn;
-    private Time timeOut;
+    private Double timeIn;
+    private Double timeOut;
     private String comment;
+
+    public Long getId() {
+        return id;
+    }
 
     public Integer getVehicleNumber() {
         return vehicleNumber;
@@ -22,19 +25,19 @@ public class PitStopEntity {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public Time getTimeIn() {
+    public Double getTimeIn() {
         return timeIn;
     }
 
-    public void setTimeIn(Time timeIn) {
+    public void setTimeIn(Double timeIn) {
         this.timeIn = timeIn;
     }
 
-    public Time getTimeOut() {
+    public Double getTimeOut() {
         return timeOut;
     }
 
-    public void setTimeOut(Time timeOut) {
+    public void setTimeOut(Double timeOut) {
         this.timeOut = timeOut;
     }
 
@@ -62,5 +65,16 @@ public class PitStopEntity {
         int result = getVehicleNumber() != null ? getVehicleNumber().hashCode() : 0;
         result = 31 * result + (getTimeIn() != null ? getTimeIn().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PitStopEntity{" +
+                "id=" + id +
+                ", vehicleNumber=" + vehicleNumber +
+                ", timeIn=" + timeIn +
+                ", timeOut=" + timeOut +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }
