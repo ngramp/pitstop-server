@@ -1,6 +1,6 @@
 package com.hawkeye.pitstop;
 
-import com.hawkeye.pitstop.model.LiveFeed;
+import com.hawkeye.pitstop.services.PitStopService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -8,14 +8,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@ComponentScan("com.hawkeye.pitstop")
 public class PitStopApplication {
     private static final Logger log = LoggerFactory.getLogger(PitStopApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(PitStopApplication.class);
+		SpringApplication.run(PitStopApplication.class, args);
 	}
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
@@ -23,11 +25,10 @@ public class PitStopApplication {
     }
 
     @Bean
-    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+    public CommandLineRunner run(PitStopService service) throws Exception {
         return args -> {
-            LiveFeed feed = restTemplate.getForObject(
-                    "http://localhost:9000/api/livefeed", LiveFeed.class);
-            log.info(feed.toString());
+            LiveFeedSync p = new LiveFeedSync("localhost", "9000", service);
+            p.start();
         };
     }
 }
