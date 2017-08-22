@@ -25,22 +25,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "com.hawkeye.pitstop")
-@PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.hawkeye.pitstop")
+@EnableJpaRepositories("com.hawkeye.pitstop.repositories")
 @EnableTransactionManagement
-public class WebConfig  extends WebMvcConfigurerAdapter {
+public class JPAConfig{
     private static final String H2_JDBC_URL_TEMPLATE = "jdbc:h2:%s/target/db/pitstopdb;AUTO_SERVER=TRUE";
-
-    @Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
-    @Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
 
     @Bean
     public DataSource dataSource(Environment env) throws Exception {
@@ -66,7 +54,6 @@ public class WebConfig  extends WebMvcConfigurerAdapter {
         initializer.setDataSource(dataSource);
         return initializer;
     }
-
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
