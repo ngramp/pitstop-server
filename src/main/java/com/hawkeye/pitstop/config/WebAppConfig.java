@@ -1,9 +1,11 @@
 package com.hawkeye.pitstop.config;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class WebAppConfig  extends WebMvcConfigurerAdapter {
@@ -13,13 +15,13 @@ public class WebAppConfig  extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
-//    @Bean
-//    public InternalResourceViewResolver viewResolver() {
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix("/");
-//        resolver.setSuffix(".html");
-//        return resolver;
-//    }
+    @Bean
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/");
+        resolver.setSuffix(".html");
+        return resolver;
+    }
 
 
 
