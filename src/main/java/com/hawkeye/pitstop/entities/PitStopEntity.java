@@ -17,6 +17,10 @@ public class PitStopEntity {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Integer getVehicleNumber() {
         return vehicleNumber;
     }

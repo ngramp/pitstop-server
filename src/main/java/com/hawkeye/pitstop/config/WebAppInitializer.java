@@ -22,14 +22,17 @@
 //        servletContext.addListener(new ContextLoaderListener(context));
 //        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context) );
 //        dispatcher.setLoadOnStartup(1);
-//        dispatcher.addMapping("/");
+//        dispatcher.addMapping("*.html");
+//        dispatcher.addMapping("*.json");
+//        dispatcher.addMapping("*.js");
+//        dispatcher.addMapping("*.css");
 //    }
 //
 //    private WebApplicationContext getContext() {
 //        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-//        context.register(JPAConfig.class);
 //        context.register(WebAppConfig.class);
 //        return context;
 //    }
+//
 //
 //}

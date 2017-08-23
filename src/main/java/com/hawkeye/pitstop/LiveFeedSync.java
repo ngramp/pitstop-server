@@ -25,12 +25,12 @@ public class LiveFeedSync extends Thread{
         int oldPitStopCount = 0;
         try{
             //TODO: not ideal, what if server goes down then comes back up?
+            System.out.println("Waiting for server");
             while(!checkServerUp()){
                 sleep(1000);
-                System.out.println("Server not up yet");
             }
+            System.out.println("Server now up");
             while(checkServerUp()){
-                System.out.println("Server now up");
                 RestTemplate restTemplate = new RestTemplate();
                 LiveFeed feed = restTemplate.getForObject(
                         server, LiveFeed.class);
