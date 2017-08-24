@@ -3,6 +3,7 @@ package com.hawkeye.pitstop.config;
 import org.hibernate.dialect.H2Dialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -21,15 +22,23 @@ import java.util.Properties;
 @EnableJpaRepositories("com.hawkeye.pitstop.repositories")
 @EnableTransactionManagement
 public class JPAConfig{
-    private static final String H2_JDBC_URL_TEMPLATE = "jdbc:h2:%s/target/db/pitstopdb;AUTO_SERVER=TRUE";
-
-
 
     @Bean
-    public DataSource dataSource(){
+    @Profile("dev")
+    public DataSource dataSourceDev(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:file:./src/main/resources/h2/db");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("");
+        return dataSource;
+    }
+    @Bean
+    @Profile("production")
+    public DataSource dataSource(){
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUrl("jdbc:h2:file:.//h2/db");
         dataSource.setUsername("sa");
         dataSource.setPassword("");
         return dataSource;

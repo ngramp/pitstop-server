@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class PitStopServiceImpl implements PitStopService{
     private static final Logger log = LoggerFactory.getLogger(PitStopServiceImpl.class);
     private PitStopRepository pitStopRepository;
